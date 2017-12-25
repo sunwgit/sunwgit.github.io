@@ -1,0 +1,458 @@
+# 2017-12-25-关于闭包-Closure
+
+```yaml
+layout:post
+title:关于闭包
+subtitle:闭包，Closure
+date:2017-12-25
+header-img:img/post-bg-2015.jpg
+catalog:true
+tags:
+	- JavaScript
+	- Closure
+```
+
+
+
+From:https://stackoverflow.com/questions/111102/how-do-javascript-closures-work
+
+This page explains closures so that a programmer can understand them — using working JavaScript code. It is not for gurus or functional programmers.
+
+Closures are *not hard* to understand once the core concept is grokked. However, they are impossible to understand by reading any academic papers or academically oriented information about them!
+
+This article is intended for programmers with some programming experience in a mainstream language, and who can read the following JavaScript function:
+
+```
+function sayHello(name) {
+  var text = 'Hello ' + name;
+  var say = function() { console.log(text); }
+  say();
+}
+sayHello('Joe');
+```
+
+## An example of a closure
+
+Two one sentence summaries:
+
+-   A closure is one way of supporting [first-class functions](https://en.wikipedia.org/wiki/First-class_function); it is an expression that can reference variables within its scope (when it was first declared), be assigned to a variable, be passed as an argument to a function, or be returned as a function result.
+-   Or, a closure is a stack frame which is allocated when a function starts its execution, and *not freed* after the function returns (as if a 'stack frame' were allocated on the heap rather than the stack!).
+
+两句话总结：
+
+-   闭包是支持一级函数（*first-class functions*）的一种方式。它是一个可以引用其作用域（*scope*,当它首次声明时产生）内所有变量表达式，可以被分配给一个变量、作为参数传递给一个函数或者作为一个函数返回的结果。
+
+-   闭包是在函数开始执行时分配的栈帧（*stack frame*）,在函数返回后并不会被释放——就像在堆（*heap*）上分配一个“栈帧”而不是栈（*stack*）中分配的那样（调用结束被释放）。
+
+    >   附：stack & stack frame
+    >
+    >   ![](img/stack-stack_frame.jpg)
+
+    下面的代码返回了一个函数的引用：
+
+    ```js
+    function sayHello2(name) {
+      var text = 'Hello ' + name; // Local variable
+      var say = function() { console.log(text); }
+      return say;
+    }
+    var say2 = sayHello2('Bob');
+    say2(); // logs "Hello Bob"
+    ```
+
+    Most JavaScript programmers will understand how a reference to a function is returned to a variable (`say2`) in the above code. If you don't, then you need to look at that before you can learn closures. A programmer using C would think of the function as returning a pointer to a function, and that the variables `say` and `say2` were each a pointer to a function.
+
+    There is a critical difference between a C pointer to a function and a JavaScript reference to a function. In JavaScript, you can think of a function reference variable as having both a pointer to a function *as well* as a hidden pointer to a closure.
+
+    The above code has a closure because the anonymous function `function() { console.log(text); }` is declared *inside* another function, `sayHello2()` in this example. In JavaScript, if you use the `function`keyword inside another function, you are creating a closure.
+
+    In C and most other common languages, *after* a function returns, all the local variables are no longer accessible because the stack-frame is destroyed.
+
+    In JavaScript, if you declare a function within another function, then the local variables can remain accessible after returning from the function you called. This is demonstrated above, because we call the function `say2()` after we have returned from `sayHello2()`. Notice that the code that we call references the variable `text`, which was a *local variable* of the function `sayHello2()`.
+
+    ```js
+    function() { console.log(text); } // Output of say2.toString();
+
+    ```
+
+    Looking at the output of `say2.toString()`, we can see that the code refers to the variable `text`. The anonymous function can reference `text` which holds the value `'Hello Bob'` because the local variables of `sayHello2()` are kept in a closure.
+
+    The magic is that in JavaScript a function reference also has a secret reference to the closure it was created in — similar to how delegates are a method pointer plus a secret reference to an object.
+
+## More examples
+
+For some reason, closures seem really hard to understand when you read about them, but when you see some examples it becomes clear how they work (it took me a while). I recommend working through the examples carefully until you understand how they work. If you start using closures without fully understanding how they work, you would soon create some very weird bugs!
+
+### Example 3
+
+This example shows that the local variables are not copied — they are kept by reference. It is kind of like keeping a stack-frame in memory when the outer function exits!
+
+```js
+function say667() {
+  // Local variable that ends up within closure
+  var num = 42;
+  var say = function() { console.log(num); }
+  num++;
+  return say;
+}
+var sayNumber = say667();
+sayNumber(); // logs 43
+```
+
+### Example 4
+
+All three global functions have a common reference to the *same* closure because they are all declared within a single call to `setupSomeGlobals()`.
+
+```js
+var gLogNumber, gIncreaseNumber, gSetNumber;
+function setupSomeGlobals() {
+  // Local variable that ends up within closure
+  var num = 42;
+  // Store some references to functions as global variables
+  gLogNumber = function() { console.log(num); }
+  gIncreaseNumber = function() { num++; }
+  gSetNumber = function(x) { num = x; }
+}
+
+setupSomeGlobals();
+gIncreaseNumber();
+gLogNumber(); // 43
+gSetNumber(5);
+gLogNumber(); // 5
+
+var oldLog = gLogNumber;
+
+setupSomeGlobals();
+gLogNumber(); // 42
+
+oldLog() // 5
+```
+
+The three functions have shared access to the same closure — the local variables of `setupSomeGlobals()` when the three functions were defined.
+
+Note that in the above example, ==if you call **`setupSomeGlobals()`** again, then a new closure (stack-frame!) is created.==The old `gLogNumber`, `gIncreaseNumber`, `gSetNumber` variables are overwritten with *new* functions that have the new closure. (In JavaScript, whenever you declare a function inside another function, the inside function(s) is/are recreated again *each* time the outside function is called.)
+
+### Example 5
+
+This one is a real gotcha for many people, so you need to understand it. Be very careful if you are defining a function within a loop: the local variables from the closure do not act as you might first think.
+
+```js
+function buildList(list) {
+    var result = [];
+    for (var i = 0; i < list.length; i++) {
+        var item = 'item' + i;
+        result.push( function() {console.log(item + ' ' + list[i])} );
+    }
+    return result;
+}
+
+function testList() {
+    var fnlist = buildList([1,2,3]);
+    // Using j only to help prevent confusion -- could use i.
+    for (var j = 0; j < fnlist.length; j++) {
+        fnlist[j]();
+    }
+}
+
+ testList() //logs "item2 undefined" 3 times
+```
+
+The line `result.push( function() {console.log(item + ' ' + list[i])}` adds a reference to an anonymous function three times to the result array. If you are not so familiar with anonymous functions think of it like:
+
+```js
+pointer = function() {console.log(item + ' ' + list[i])};
+result.push(pointer);
+```
+
+Note that when you run the example, `"item2 undefined"` is alerted three times! This is because just like previous examples, there is only one closure for the local variables for `buildList`. When the anonymous functions are called on the line `fnlist[j]()`; they all use the same single closure, and they use the current value for `i` and `item` within that one closure (where `i` has a value of `3` because the loop had completed, and `item` has a value of `'item2'`). Note we are indexing from 0 hence `item` has a value of `item2`. And the i++ will increment `i` to the value `3`.
+
+### Example 6
+
+This example shows that the closure contains any local variables that were declared inside the outer function before it exited. Note that the variable `alice` is actually declared after the anonymous function. The anonymous function is declared first; and when that function is called it can access the `alice` variable because `alice` is in the same scope (JavaScript does [variable hoisting](https://stackoverflow.com/a/3725763/1269037)). Also `sayAlice()()` just directly calls the function reference returned from `sayAlice()` — it is exactly the same as what was done previously but without the temporary variable.
+
+```js
+function sayAlice() {
+    var say = function() { console.log(alice); }
+    // Local variable that ends up within closure
+    var alice = 'Hello Alice';
+    return say;
+}
+sayAlice()();// logs "Hello Alice"
+```
+
+Tricky: note also that the `say` variable is also inside the closure, and could be accessed by any other function that might be declared within `sayAlice()`, or it could be accessed recursively within the inside function.
+
+### Example 7
+
+This final example shows that each call creates a separate closure for the local variables. There is *not* a single closure per function declaration. There is a closure for ==*each call*== to a function.
+
+```js
+function newClosure(someNum, someRef) {
+    // Local variables that end up within closure
+    var num = someNum;
+    var anArray = [1,2,3];
+    var ref = someRef;
+    return function(x) {
+        num += x;
+        anArray.push(num);
+        console.log('num: ' + num +
+            '; anArray: ' + anArray.toString() +
+            '; ref.someVar: ' + ref.someVar + ';');
+      }
+}
+obj = {someVar: 4};
+fn1 = newClosure(4, obj);
+fn2 = newClosure(5, obj);
+fn1(1); // num: 5; anArray: 1,2,3,5; ref.someVar: 4;
+fn2(1); // num: 6; anArray: 1,2,3,6; ref.someVar: 4;
+obj.someVar++;
+fn1(2); // num: 7; anArray: 1,2,3,5,7; ref.someVar: 5;
+fn2(2); // num: 8; anArray: 1,2,3,6,8; ref.someVar: 5;
+```
+
+## Summary
+
+If everything seems completely unclear then the best thing to do is to play with the examples. Reading an explanation is much harder than understanding examples. My explanations of closures and stack-frames, etc. are not technically correct — they are gross simplifications intended to help understanding. Once the basic idea is grokked, you can pick up the details later.
+
+## Final points:
+
+-   Whenever you use `function` inside another function, a closure is used.
+-   Whenever you use `eval()` inside a function, a closure is used. The text you `eval` can reference local variables of the function, and within `eval` you can even create new local variables by using `eval('var foo = …')`
+-   When you use `new Function(…)` (the [Function constructor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function)) inside a function, it does not create a closure. (The new function cannot reference the local variables of the outer function.)
+-   A closure in JavaScript is like keeping a copy of all the local variables, just as they were when a function exited.
+-   It is probably best to think that a closure is always created just an entry to a function, and the local variables are added to that closure.
+-   A new set of local variables is kept every time a function with a closure is called (given that the function contains a function declaration inside it, and a reference to that inside function is either returned or an external reference is kept for it in some way).
+-   Two functions might look like they have the same source text, but have completely different behaviour because of their 'hidden' closure. I don't think JavaScript code can actually find out if a function reference has a closure or not.
+-   If you are trying to do any dynamic source code modifications (for example: `myFunction = Function(myFunction.toString().replace(/Hello/,'Hola'));`), it won't work if `myFunction` is a closure (of course, you would never even think of doing source code string substitution at runtime, but...).
+-   It is possible to get function declarations within function declarations within functions — and you can get closures at more than one level.
+-   I think normally a closure is the term for both the function along with the variables that are captured. Note that I do not use that definition in this article!
+-   I suspect that closures in JavaScript differ from those normally found in functional languages.
+
+## Links
+
+-   Douglas Crockford's simulated [private attributes and private methods](http://www.crockford.com/javascript/private.html) for an object, using closures.
+-   A great explanation of how closures can [cause memory leaks in IE](https://www.codeproject.com/Articles/12231/Memory-Leakage-in-Internet-Explorer-revisited) if you are not careful.
+
+## Thanks
+
+If you have *just* learned closures (here or elsewhere!), then I am interested in any feedback from you about any changes you might suggest that could make this article clearer. Send an email to morrisjohns.com (morris_closure @). Please note that I am not a guru on JavaScript — nor on closures.
+
+
+
+---
+
+# 附上一篇国人的译文
+
+## [闭包，懂不懂由你，反正我是懂了](http://www.cnblogs.com/frankfang/archive/2011/08/03/2125663.html)  
+
+　　越来越觉得国内没有教书育人的氛围，为了弄懂JS的闭包，我使出了我英语四级吃奶的劲去google上搜寻着有关闭包的解释，当我看到stackoverflow上[这一篇解答](http://stackoverflow.com/questions/111102/how-do-javascript-closures-work)，我脑中就出现了一句话：就是这货没跑了！
+
+　　不才译文见下，见笑了。
+
+　　Peter Mortensen问：
+
+>   就像老Albert所说的，“如果你不能向一个六岁的孩子解释清楚，那么其实你自己根本就没弄懂。”好吧，我试着向一个27岁的朋友就是JS闭包（JavaScript closure）却彻底失败了。
+>
+>   你们会怎么把它解释给一个充满好奇心的六岁孩子听呢？
+>
+>   注：我看过StackOverflow上给出的示例，但根本没用。
+
+　　Ali的回答：
+
+　　当function里嵌套function时，内部的function可以访问外部function里的变量。
+
+```js
+function foo(x) {
+
+    var tmp = 3;
+
+    function bar(y) {
+
+        alert(x + y + (++tmp));
+
+    }
+
+    bar(10);
+
+}
+
+foo(2)
+
+```
+
+
+
+　　不管执行多少次，都会alert 16，因为bar能访问foo的参数x，也能访问foo的变量tmp。
+
+　　但，这还不是闭包。当你return的是内部function时，就是一个闭包。内部function会close-over外部function的变量直到内部function结束。
+
+```js
+function foo(x) {
+
+    var tmp = 3;
+
+    return function (y) {
+
+        alert(x + y + (++tmp));
+
+    }
+
+}
+
+var bar = foo(2); // bar 现在是一个闭包
+
+bar(10);
+```
+
+
+
+　　上面的脚本最终也会alert 16，因为虽然bar不直接处于foo的内部作用域，但bar还是能访问x和tmp。
+
+　　但是，由于tmp仍存在于bar闭包的内部，所以它还是会自加1，而且你每次调用bar时它都会自加1.
+
+　　（考虑到六岁这个限制：我们其实可以建立不止一个闭包方法，比如return它们的数组，也可以把它们设置为全局变量。它们全都指向相同的x和相同的tmp，而不是各自有一份副本。）
+
+　　注：现在来整点儿七岁的内容。
+
+　　上面的x是一个字面值（值传递），和JS里其他的字面值一样，当调用foo时，实参x的值被复制了一份，复制的那一份作为了foo的参数x。
+
+　　那么问题来了，JS里处理object时是用到引用传递的，那么，你调用foo时传递一个object，foo函数return的闭包也会引用最初那个object！
+
+```js
+function foo(x) {
+
+var tmp = 3;
+
+return function (y) {
+
+    alert(x + y + tmp);
+
+    x.memb = x.memb ? x.memb + 1 : 1;
+
+    alert(x.memb);
+
+    }
+
+}
+
+var age = new Number(2);
+
+var bar = foo(age); // bar 现在是一个引用了age的闭包
+
+bar(10);
+```
+
+
+
+　　不出我们意料，每次运行bar(10)，x.memb都会自加1。但需要注意的是x每次都指向同一个object变量——age，运行两次bar(10)后，age.memb会变成2.
+
+　　这和HTML对象的内存泄漏有关，呃，不过貌似超出了答题的范围。
+
+　　JohnMerlino 对Ali说：
+
+　　这里有一个不用return关键字的闭包例子：
+
+```js
+function closureExample(objID, text, timedelay) { 
+
+    setTimeout(function() { 
+
+        document.getElementById(objID).innerHTML = text; 
+
+    }, timedelay); 
+
+} 
+
+closureExample(‘myDiv’, ‘Closure is created’, 500);
+```
+
+　　深夜1:37 John Pick这样回答：
+
+　　JS里的function能访问它们的：
+
+      　　1. 参数
+
+      　　2. 局部变量或函数
+
+      　　3. 外部变量（环境变量？），包括
+
+>   3.1 全局变量，包括DOM。
+>
+>   3.2 外部函数的变量或函数。
+
+　　如果一个函数访问了它的外部变量，那么它就是一个闭包。
+
+　　注意，外部函数不是必需的。通过访问外部变量，一个闭包可以维持（keep alive）这些变量。在内部函数和外部函数的例子中，外部函数可以创建局部变量，并且最终退出；但是，如果任何一个或多个内部函数在它退出后却没有退出，那么内部函数就维持了外部函数的局部数据。
+
+　　一个典型的例子就是全局变量的使用。
+
+　　mykhal这样回答：
+
+　　Wikipedia对闭包的定义是这样的：
+
+>   In computer science, a closure is a function together with a referencing environment for the nonlocal names (free variables) of that function.
+
+　　从技术上来讲，在JS中，每个function都是闭包，因为它总是能访问在它外部定义的数据。
+
+　　Since **scope-defining construction in Javascript is a function**, not a code block like in many other languages, **what we usually mean by closure in Javascript** is a **fuction working with nonlocal variables defined in already executed surrounding function**.
+
+　　闭包经常用于创建含有隐藏数据的函数（但并不总是这样）。
+
+```js
+var db = (function() {
+
+// 创建一个隐藏的object, 这个object持有一些数据
+
+// 从外部是不能访问这个object的
+
+var data = {};
+
+// 创建一个函数, 这个函数提供一些访问data的数据的方法
+
+return function(key, val) {
+
+    if (val === undefined) { return data[key] } // get
+
+    else { return data[key] = val } // set
+
+    }
+
+// 我们可以调用这个匿名方法
+
+// 返回这个内部函数，它是一个闭包
+
+})();
+
+db('x'); // 返回 undefined
+
+db('x', 1); // 设置data['x']为1
+
+db('x'); // 返回 1
+
+// 我们不可能访问data这个object本身
+
+// 但是我们可以设置它的成员
+```
+
+　　看了这么多外国大牛的解答，不知道你懂还是不懂，反正我是懂了。
+
+　　P.S. 发布文章之后看到@xiaotie的[一篇文章](http://www.cnblogs.com/xiaotie/archive/2011/08/03/2126145.html)，觉得有必要推荐一下，因为其剖析得更为深入。有人说应该在文章结尾对闭包进行总结，可惜小弟才疏学浅，不能给出一个精辟的总结。
+
+　　@xiaotie对闭包的总结如下：
+
+>   （1）闭包是一种设计原则，它通过分析上下文，来简化用户的调用，让用户在不知晓的情况下，达到他的目的；
+>
+>   （2）网上主流的对闭包剖析的文章实际上是和闭包原则反向而驰的，如果需要知道闭包细节才能用好的话，这个闭包是设计失败的；
+>
+>   （3）尽量少学习。
+
+　　大家学习学习。
+
+---
+
+# 最后有必要补上知乎的一篇
+
+## [关于for循环中的问题](https://www.zhihu.com/question/33468703)
+
+![](img/for-closure.png)
+
