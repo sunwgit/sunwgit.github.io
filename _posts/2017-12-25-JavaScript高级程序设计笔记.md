@@ -893,9 +893,12 @@ ECMAScript 中描述了原型链的概念，并将原型链作为实现继承的
 ### 递归
 
 -   arguments.callee
+
 -   [为什么ES5严格模式删除了arguments.callee](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/arguments/callee)
 
-### [闭包](https://github.com/sunwgit/ReadingNotes/blob/master/js/%E5%85%B3%E4%BA%8E%E9%97%AD%E5%8C%85-closure.md)
+### 闭包
+
+[参见：关于闭包-Closure](https://sunwgit.github.io/2017/12/25/%E5%85%B3%E4%BA%8E%E9%97%AD%E5%8C%85-Closure/)
 
 ### 模仿块级作用域
 
