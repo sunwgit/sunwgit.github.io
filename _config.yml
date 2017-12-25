@@ -1,10 +1,10 @@
 # Site settings
-title: ReadingNotes
-SEOTitle: Scott的博客 | ReadingNotes
+title: 松一老贼
+SEOTitle: 松一老贼的博客 | 松一老贼
 header-img: img/post-bg-desk.jpg
 email: sun900621@gmail.com
 description: "学习，记录."
-keyword: "Scott, ReadingNotes,  Scott的博客, 前端"
+keyword: "松一老贼,  松一老贼的博客"
 url: "http://sunwgit.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/sunwgit/sunwgit.github.io.git" # you code repository
