@@ -59,7 +59,7 @@ ps:有些书中所谓的DOM0 级实际上是指 DHTML.
 
 # 在HTML中使用JavaScript
 
-## \<script> 元素
+## script 标签元素
 
 ### 一些属性
 
