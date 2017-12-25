@@ -572,7 +572,7 @@ console.log(person);
 
 **原型对象——构造函数——实例对象**之间的关系
 
-![](img/prototype-1.png)
+![](https://raw.githubusercontent.com/sunwgit/sunwgit.github.io/master/_posts/img/prototype-1.png)
 
 可以通过 **isPrototypeOf()** 方法来确定对象之间是否存在这种关系。从本质上讲，如果[[Prototype]]指向调用 isPrototypeOf()方法的对象（Person.prototype），那么这个方法就返回 true，如下所示：
 
@@ -587,7 +587,7 @@ console.log(Object.getPrototypeOf(person)===Person.prototype);
 console.log(Object.getPrototypeOf(person));
 ```
 
-![](img/prototype-2.png)
+![](https://raw.githubusercontent.com/sunwgit/sunwgit.github.io/master/_posts/img/prototype-2.png)
 
 可以通过对象实例访问prototype的值，但是对象实例不能重写prototype中的值。当为对象实例添加一个属性时，这个属性就会屏蔽原型对象中保存的同名属性；
 
@@ -595,7 +595,7 @@ console.log(Object.getPrototypeOf(person));
 person.age=12;
 ```
 
-![](img/prototype-3.png)
+![](https://raw.githubusercontent.com/sunwgit/sunwgit.github.io/master/_posts/img/prototype-3.png)
 
 #### 原型与 in 操作符
 
@@ -671,7 +671,7 @@ p2.sayName();//没问题
 >   console.log(Object.getPrototypeOf(p2));
 >   ```
 >
->   ![](img/prototype-4.png)
+>   ![](https://raw.githubusercontent.com/sunwgit/sunwgit.github.io/master/_posts/img/prototype-4.png)
 
 从上面的例子中还可以看出一点：**重写原型创建的对象的构造器是隐式的Object,而不是显式的Person**，验证：
 
@@ -855,7 +855,7 @@ ECMAScript 中描述了原型链的概念，并将原型链作为实现继承的
 
 结果分析：
 
-![](img/inherit.png)
+![](https://raw.githubusercontent.com/sunwgit/sunwgit.github.io/master/_posts/img/inherit.png)
 
 >   确定原型与实例的关系：instanceof、isPrototypeOf
 
@@ -938,7 +938,7 @@ function MyObject(){
 console.log(new MyObject());//查看公共属性
  ```
 
-![](img/private-var-1.png)
+![](https://raw.githubusercontent.com/sunwgit/sunwgit.github.io/master/_posts/img/private-var-1.png)
 
 缺点：必须依赖[构造函数模式](#构造函数模式)创建对象。
 
@@ -967,7 +967,7 @@ console.log(new MyObject());//查看公共属性
 console.log(new MyObject());//MyObject没有var声明，所以是一个全局变量，可以在外部访问
 ```
 
-![](img/private-var-2.png)
+![](https://raw.githubusercontent.com/sunwgit/sunwgit.github.io/master/_posts/img/private-var-2.png)
 
 ps:这个模式在定义构造函数时并没有使用函数声明，而是
 使用了函数表达式 -->函数声明至创建局部变量，因此MyObject用了函数表达式的形式-->但在严格模式下，未经声明赋值会导致错误。
@@ -1027,7 +1027,7 @@ var singleton = function () {
 console.log(singleton);
 ```
 
-![](img/private-var-3.png)
+![](https://raw.githubusercontent.com/sunwgit/sunwgit.github.io/master/_posts/img/private-var-3.png)
 
 没有构造器，保证了单例，直接返回一个对象，且永远只有一个。
 
@@ -1065,11 +1065,11 @@ var singleton = function () {
 console.log(singleton);
 ```
 
-![](img/private-var-4.png)
+![](https://raw.githubusercontent.com/sunwgit/sunwgit.github.io/master/_posts/img/private-var-4.png)
 
 ### 总结
 
-![](img/fun-ex-sumary.png)
+![](https://raw.githubusercontent.com/sunwgit/sunwgit.github.io/master/_posts/img/fun-ex-sumary.png)
 
 ---==JS的基础到此结束！==---
 
@@ -1103,7 +1103,7 @@ var newValue = window.oldValue;//不报错，oldValue值为undefined
 
 若页面包含框架，每个框架都有自己的window对象，保存在frames集合中。frames集合可以通过数值索引（从 0 开始，从左至右，从上到下）或者框架名称来访问相应的 window 对象。每个 window 对象都有一个 name 属性，其中包含框架的名称。
 
-![](img/frame.png)
+![](https://raw.githubusercontent.com/sunwgit/sunwgit.github.io/master/_posts/img/frame.png)
 
 top:该对象始终指向最外层框架，即浏览器窗口；
 
