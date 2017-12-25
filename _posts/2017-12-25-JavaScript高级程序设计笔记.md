@@ -1,7 +1,7 @@
 ---
 layout: post
 title: JavaScript高级程序设计-笔记
-subtitle: ReadingNo
+subtitle: ReadingNotes
 date: 2017-12-25
 header-img: img/post-bg-2015.jpg
 catalog: true
@@ -9,7 +9,6 @@ tags:
  - JavaScript
 ---
 
-[TOC]
 # JavaScript实现
 
 ECMA-262——定义一种名为 ECMAScript(ek-ma-script) 的新脚本语言的**标准**.
