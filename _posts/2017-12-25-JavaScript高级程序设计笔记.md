@@ -1,6 +1,6 @@
 ---
 layout: post
-title: JavaScript高级程序设计-笔记
+title: 《JavaScript高级程序设计》
 subtitle: ReadingNotes
 date: 2017-12-25
 header-img: img/post-bg-2015.jpg
