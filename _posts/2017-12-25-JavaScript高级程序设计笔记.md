@@ -1126,9 +1126,69 @@ top===parent:页面没有frame,他们都指向唯一的window;
 
 self:始终指向window.
 
+### 窗口位置
+
+| 浏览器属性      | 含义             | 备注              |
+| ---------- | -------------- | --------------- |
+| screenLeft | 表示窗口相对于屏幕左边的位置 | Firefox为screenX |
+| screenTop  | 表示窗口相对于屏幕顶部的位置 | Firefox为screenX |
+
+moveTo():参数为新位置的x和y坐标值，不适用于框架，只对外层window对象适用。
+
+moveBy():参数为x和y轴位移的像素值,不适用于框架，只对外层window对象适用。
+
+### 窗口大小
+
+| 浏览器属性                       | IE9+/Firefox/Safari                     | Chrome       |
+| --------------------------- | --------------------------------------- | ------------ |
+| innerWidth<br />innerHeight | 表示视口即页面视图区的大小（减去边框宽度）                   | 视口viewport大小 |
+| outerWidth<br />outerHeight | 返回浏览器窗口本身尺寸（无论从最外层window对象还是从某个frame访问） | 视口viewport大小 |
+
+`document.documentElement.clientWidth`和`document.documentElement.clientHeight`保存了页面视口信息。
+
+标准模式：`document.compatMode==="CSS1Compat"`
+
+混杂模式：`document.compatMode==="BackCompat"`
+
+[关于document.compatMode](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/compatMode)
+
+调整浏览器窗口大小：`resizeTo()`、`resizeBy()`
+
+### 导航和打开窗口
+
+[window.open()](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/open)
+
+### 间歇调用和超时调用
+
+JavaScript是单线程语言，但允许设置超时值来和间歇时间来调度代码在特定时间执行。
+
+超时调用：`setTimeOut()`,取消超时调用 `clearTimeout()`
+
+间歇调用：`setInterval()`,取消间歇调用 `clearInterval()`
+
+### 系统对话框
+
+`alert()`、`confirm()`、`prompt()`
+
+它们的外观不受css控制，只跟系统和浏览器有关；
+
+通过它们打开的对话框是**同步和模态**的，即显示对话框时代码会暂停执行，关掉窗口代码恢复执行。
+
 ## location对象
 
+提供了当前窗口中加载的文档有关的信息，并有一些导航功能。
 
+既是window对象的属性，也是document对象的属性：`window.location`和`document.location` 引用的是同一个对象。详细请[参考...](https://developer.mozilla.org/zh-CN/docs/Web/API/Location)
+
+location对象的一些属性：
+
+![](https://raw.githubusercontent.com/sunwgit/sunwgit.github.io/master/_posts/img/js-location-prop.png)
+
+除了hash,其他属性都会导致页面重新加载。
+
+`location.reload()` 使页面以*最有效[^如果不传参数，优先从浏览器缓存重新加载；如果传入参数 `true`,则强制从服务器获取数据重新加载。]*的方式重新加载。
+
+`location.assign()` 相当于window.location/location.href,会留下历史记录。如果想在修改 `URL` 之后，不留下历史记录，可以使用`location.replace()`.
 
 ## navigator对象
 
