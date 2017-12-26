@@ -96,3 +96,9 @@ service-worker: true
 
 
 # Friends
+friends:[
+  {
+    title: "MDN",
+    href: "https://developer.mozilla.org/zh-CN/"
+  }
+]
