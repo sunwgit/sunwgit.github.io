@@ -50,7 +50,7 @@ gems: [jekyll-paginate]
 markdown: kramdown
 highlighter: rouge
 kramdown:
-  input: GFM                            # use Github Flavored Markdown !important
+input: GFM                            # use Github Flavored Markdown !important
 
 
 
@@ -59,14 +59,14 @@ kramdown:
 # disqus_username: qiubaiying
 
 # Gitalk
-#gitalk:
-  #enable: false    #是否开启Gitalk评论
- #clientID: f2c84e7629bb1446c1a4   #生成的clientID
- # clientSecret: ca6d6139d1e1b8c43f8b2e19492ddcac8b322d0d  #同上
-#  repo: qiubaiying.github.io    #仓库名称
- # owner: qiubaiying    #github用户名
-  #admin: qiubaiying
-#  distractionFreeMode: true #是否启用类似FB的阴影遮罩
+gitalk:
+enable: true    #是否开启Gitalk评论
+clientID: 5386fad33b0f3856a2b9   #生成的clientID
+clientSecret: d80283cb684b47429eede991b5dbfcb2d77c1828  #同上
+repo: sunwgit.github.io    #仓库名称
+owner: sunwgit    #github用户名
+admin: sunwgit
+distractionFreeMode: true #是否启用类似FB的阴影遮罩
 
 
 # 统计

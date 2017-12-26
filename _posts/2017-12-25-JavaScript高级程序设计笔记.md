@@ -1128,6 +1128,8 @@ self:始终指向window.
 
 ## location对象
 
+
+
 ## navigator对象
 
 ## screen对象
