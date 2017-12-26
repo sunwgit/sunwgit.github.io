@@ -1186,7 +1186,7 @@ location对象的一些属性：
 
 除了hash,其他属性都会导致页面重新加载。
 
-`location.reload()` 使页面以*最有效[^如果不传参数，优先从浏览器缓存重新加载；如果传入参数 `true`,则强制从服务器获取数据重新加载。]*的方式重新加载。
+`location.reload()` 使页面以*最有效*[^1]: 如果不传参数，优先从浏览器缓存重新加载；如果传入参数 `true`,则强制从服务器获取数据重新加载。的方式重新加载。
 
 `location.assign()` 相当于window.location/location.href,会留下历史记录。如果想在修改 `URL` 之后，不留下历史记录，可以使用`location.replace()`.
 
