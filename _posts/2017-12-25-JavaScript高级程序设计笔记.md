@@ -1194,6 +1194,27 @@ location对象的一些属性：
 
 ## navigator对象
 
+### 检测插件
+
+非IE浏览器：`navigator.plugins` 数组，name/description/filename/length
+
+```js
+function hasPlugin(name){
+  name = name.toLowerCase();
+  for(var i=0;i<navigator.plugins.length;i++){
+    if(navigator.plugins[i].name.toLowerCase().indexOf(name)>-1){
+      return true;
+    }
+  }
+  return false;
+}
+
+// 检测Flash
+alert(hasPlugin("Flash"));
+```
+
+
+
 ## screen对象
 
 ## history对象
@@ -1229,5 +1250,7 @@ location对象的一些属性：
 
 ------
 ###### 脚注
+
+图片前缀 https://raw.githubusercontent.com/sunwgit/sunwgit.github.io/master/_posts/img/
 
 [^1]: 如果不传参数，优先从浏览器缓存重新加载；如果传入参数 true,则强制从服务器获取数据重新加载。
