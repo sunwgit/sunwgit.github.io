@@ -430,6 +430,34 @@ var num3 = ++a +b;//22
 
 #### 关系操作符
 
+# 引用类型
+
+## Object类型
+
+创建方式有两种：
+
+1. new 构造函数
+2. 字面量方式，类似JSON，不会调用构造函数
+
+## Array 类型
+
+创建方式和Obejct一样，new,字面量（不会调用构造函数）
+
+1. length属性不是只读，可通过修改length设置元素
+2. 检测数组：`instanceof`,`isArray()`
+3. 转换方法：`toString()`,`valueOf()`,`join()`
+4. 栈方法：`push()`,`pop()`
+5. 队列方法：`push()`,`shift()`,`unshift()`
+6. 重新排序方法:`reverse()`,`sort()`
+7. 操作方法:`concat()`,`slice()`,`splice()`
+8. 位置方法:`indexOf()`,`lastIndexOf()`
+9. 迭代方法:`every()`,`filter()`,`forEach()`,`map()`,`some()`
+10. 归并方法:`reduce()`,`reduceRight()`
+
+## Date类型
+
+
+
 #  面向对象的程序设计
 
 ECMA-262 把对象定义为：“无序属性的集合，其属性可以包含基本值、对象或者函数。” 
