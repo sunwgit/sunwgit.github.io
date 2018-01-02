@@ -211,7 +211,7 @@ alert(null===undefined);//false
 
 **算术计算时，所有八进制和十六进制数值都会转成十进制**
 
-> +0 == -0;	//true
+> `+0 == -0;`	//true
 
 ##### 浮点数值
 
@@ -228,10 +228,10 @@ alert(c==0.3);//false 实际c的值为0.30000000000000004
 
 ##### 数值范围
 
-Number.NEGATIVE_INFINITY(-Infinity)
-Number.MIN_VALUE
-`isFinite();//true`
-Number.MAX_VALUE
+Number.NEGATIVE_INFINITY(-Infinity)  
+Number.MIN_VALUE  
+`isFinite();//true`  
+Number.MAX_VALUE  
 Number.POSITIVE_INFINITY(Infinity)
 
 ##### NaN
@@ -1136,7 +1136,7 @@ console.log(singleton);
 
 ![](https://raw.githubusercontent.com/sunwgit/sunwgit.github.io/master/_posts/img/fun-ex-sumary.png)
 
----*JS的基础到此结束！*---
+--- *JS的基础到此结束！*---
 
 ---
 
