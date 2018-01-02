@@ -103,11 +103,11 @@ ps:有些书中所谓的DOM0 级实际上是指 DHTML.
 
 ### 标识符
 
-==变量、函数、属性的名字，函数的参数==
+**变量、函数、属性的名字，函数的参数**
 
 > 规则：
 >
-> 首个字母必须是==字母、下划线、$==;
+> 首个字母必须是**字母、下划线、$==;
 >
 > 其他字符可以是字母、下划线、$、数字。
 
@@ -142,19 +142,19 @@ var 操作符，局部变量，弱类型。
 
 > 最佳实践是把弱类型当作强类型来用。
 
-不用var 操作符定义的变量，将作为全局变量，==不推荐==。
+不用var 操作符定义的变量，将作为全局变量，**不推荐**。
 
 [关于var声明变量更详细的说明以及**变量提升(hoisting)**](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/var)
 
 ### 数据类型
 
-**基本数据类型：==undefined、null、boolean、number、string==**
+基本数据类型：**undefined、null、boolean、number、string**
 
-**复杂(引用)数据类型：==Object==**
+复杂(引用)数据类型：**Object**
 
 #### typeof 操作符
 
-==用来检测基本数据类型，除了null.==
+**用来检测基本数据类型，除了null.**
 
 > typeof  null 会返回 "object";
 >
@@ -205,11 +205,11 @@ alert(null===undefined);//false
 
 十进制	最基本的数值字面量格式。
 
-八进制	==0==打头,严格模式下无效，js引擎报错。
+八进制	`0`打头,严格模式下无效，js引擎报错。
 
-十六进制	==0x==打头
+十六进制	`0x`打头
 
-==算术计算时，所有八进制和十六进制数值都会转成十进制==
+**算术计算时，所有八进制和十六进制数值都会转成十进制**
 
 > +0 == -0;	//true
 
@@ -217,7 +217,7 @@ alert(null===undefined);//false
 
 默认情况下，ECMAScript 会将那些小数点后带有6个0以上的数值转为科学计数法。
 
-==永远不要测试某个特定的浮点数值==
+**永远不要测试某个特定的浮点数值**
 
 ```javascript
 var a=0.1;
@@ -230,7 +230,7 @@ alert(c==0.3);//false 实际c的值为0.30000000000000004
 
 Number.NEGATIVE_INFINITY(-Infinity)
 Number.MIN_VALUE
-==isFinite();//true==
+`isFinite();//true`
 Number.MAX_VALUE
 Number.POSITIVE_INFINITY(Infinity)
 
@@ -238,7 +238,7 @@ Number.POSITIVE_INFINITY(Infinity)
 
 特殊的数值。
 
-ECMAScript中，任何==数值范围以外==值除以0返回NaN.
+ECMAScript中，任何**数值范围以外**值除以0返回NaN.
 
 ```javascript
 NaN==NaN;//false
@@ -292,11 +292,11 @@ parseInt()/parseFloat()更加适合用来把字符串转化为数字。
 
 ##### 转换为string
 
-除了null/undefined，其他js数据类型都有一个==toString()==方法。
+除了null/undefined，其他js数据类型都有一个`toString()`方法。
 
 toString()默认输出十进制字符串，可传入表示进制基数的参数，输出需要的进制表示的字符串。
 
-==String()函数==，可转任何类型为string,规则：
+`String()`函数，可转任何类型为string,规则：
 
 > if toString():return toString();
 >
@@ -332,7 +332,7 @@ toString()默认输出十进制字符串，可传入表示进制基数的参数�
 
 #### 一元操作符
 
-==自增 ++/自减 --==
+**自增 ++/自减 --**
 
 ```javascript
 var a=2;
@@ -438,12 +438,12 @@ ECMA-262 把对象定义为：“无序属性的集合，其属性可以包含�
 
 ### 属性类型
 
-==ECMA-262 第 5 版在定义只有内部才用的特性（attribute）时，描述了属性（property）的各种特征。==
+**ECMA-262 第 5 版在定义只有内部才用的特性（attribute）时，描述了属性（property）的各种特征。**
 ECMA-262 定义这些特性是为了实现 JavaScript 引擎用的，因此在 JavaScript 中不能直接访问它们。为了表示特性是内部值，该规范把它们放在了两对儿方括号中，例如[[Enumerable]]。 
 
-ECMAScript 中有两种属性：==数据属性==和==访问属性==
+ECMAScript 中有两种属性：**数据属性**和**访问属性**
 
-- 数据属性包含一个数据值的位置。在这个位置可以读取和写入值。有四个==特性(attibute)==：
+- 数据属性包含一个数据值的位置。在这个位置可以读取和写入值。有四个**特性(attibute)**：
 
 > **[[Configurable]]**：表示对象的属性能否delete从而重新定义属性，能否修改属性的特性。对直接定义在对象上的属性，默认true.(这个attribute权限最重)
 >
@@ -453,7 +453,7 @@ ECMAScript 中有两种属性：==数据属性==和==访问属性==
 >
 > **[[Value]]**：包含这个属性的数据值。读写属性值都从这里读写，默认undefined.
 
-要修改对象属性默认的特性，必须使用ECMAScript5 的==Object.defineProperty()==方法。三个参数：属性所在**对象**、引号引起来的**属性名**、**描述符对象**。
+要修改对象属性默认的特性，必须使用ECMAScript5 的`Object.defineProperty()`方法。三个参数：属性所在**对象**、引号引起来的**属性名**、**描述符对象**。
 
 > 描述符（descriptor）对象的属性必须是：configurable、enumerable、writable、value.
 >
@@ -473,7 +473,7 @@ ECMAScript 中有两种属性：==数据属性==和==访问属性==
 
 ### 定义多个属性 & 读取属性的特性
 
-由于为对象定义多个属性的可能性很大，ECMAScript 5又定义了一个==Object.defineProperties()==方法。利用这个方法可以通过描述符一次定义多个属性。这个方法接收**两个对象参数**：第一个对象是要添加和修改其属性的对象，第二个对象的属性与第一个对象中要添加或修改的属性一一对应。
+由于为对象定义多个属性的可能性很大，ECMAScript 5又定义了一个`Object.defineProperties()`方法。利用这个方法可以通过描述符一次定义多个属性。这个方法接收**两个对象参数**：第一个对象是要添加和修改其属性的对象，第二个对象的属性与第一个对象中要添加或修改的属性一一对应。
 
 ```javascript
 var book={};
@@ -564,7 +564,7 @@ var person = new Person("kiki",33);
 
 #### 理解原型对象
 
-我们创建的==每个函数都有一个 prototype（原型）属性，这个属性是一个指针，指向一个对象，而这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法。==使用原型对象的好处是可以让所有对象实例共享它所包含的属性和方法。
+我们创建的**每个函数都有一个 prototype（原型）属性，这个属性是一个指针，指向一个对象，而这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法。** 使用原型对象的好处是可以让所有对象实例共享它所包含的属性和方法。
 
 ```js
 function Person() {
@@ -584,7 +584,7 @@ console.log(person);
 
 ![](https://raw.githubusercontent.com/sunwgit/sunwgit.github.io/master/_posts/img/prototype-1.png)
 
-可以通过 **isPrototypeOf()** 方法来确定对象之间是否存在这种关系。从本质上讲，如果[[Prototype]]指向调用 isPrototypeOf()方法的对象（Person.prototype），那么这个方法就返回 true，如下所示：
+可以通过 `isPrototypeOf()` 方法来确定对象之间是否存在这种关系。从本质上讲，如果[[Prototype]]指向调用 isPrototypeOf()方法的对象（Person.prototype），那么这个方法就返回 true，如下所示：
 
 ```js
 alert(Person.prototype.isPrototypeOf(person));//true
@@ -611,11 +611,11 @@ person.age=12;
 
 有两种方式使用 in 操作符：单独使用和在 for-in 循环中使用。 
 
-在单独使用时， in 操作符会在通过对象能够访问给定属性时返回 true，==无论该属性存在于实例中还是原型中。==
+在单独使用时， in 操作符会在通过对象能够访问给定属性时返回 true，**无论该属性存在于实例中还是原型中。**
 
 在使用for-in循环时，返回的是所有能够通过对象访问的、可枚举的（enumerated）属性，其中既包括存在于实例中的属性，也包括存在于原型中的属性。屏蔽（比如手动添加toString属性，屏蔽了原型中的toString）了原型中不可枚举属性（即将[[Enumerable]]标记为 false 的属性,ES 5中toString/constructor/prototype都是默认false,不可枚举）的实例属性也会在 for-in循环中返回，因为根据规定，所有开发人员定义的属性都是可枚举的。
 
-要取得对象上所有可枚举的实例属性，可以使用 ECMAScript 5 的 ==Object.keys()==方法。这个方法接收一个对象作为参数，返回一个包含所有可枚举属性的字符串数组。 
+要取得对象上所有可枚举的实例属性，可以使用 ECMAScript 5 的 `Object.keys()`方法。这个方法接收一个对象作为参数，返回一个包含所有可枚举属性的字符串数组。 
 
 ```js
 function Person(){}
@@ -716,7 +716,7 @@ alert(p1.friends===p2.friends);//true
 
 ### 组合使用构造函数模式
 
-**创建自定义类型的最常见方式，就是组合使用构造函数模式与原型模式。**==构造函数模式用于定义实例属性，而原型模式用于定义方法和共享的属性==。结果，每个实例都会有自己的一份实例属性的副本，但同时又共享着对方法的引用，最大限度地节省了内存。另外，这种混成模式还支持向构造函数传递参数；可谓是集两种模式之长。 
+**创建自定义类型的最常见方式，就是组合使用构造函数模式与原型模式。构造函数模式用于定义实例属性，而原型模式用于定义方法和共享的属性**。结果，每个实例都会有自己的一份实例属性的副本，但同时又共享着对方法的引用，最大限度地节省了内存。另外，这种混成模式还支持向构造函数传递参数；可谓是集两种模式之长。 
 
 ```js
 function Person(name, age, job) {
@@ -802,7 +802,7 @@ alert(colors.toPipedString());// "red|orange|yellow"
 
 道格拉斯·克罗克福德（Douglas Crockford）发明了 JavaScript 中的**稳妥对象（durable objects）**这个概念。
 
-==所谓稳妥对象，指的是没有公共属性，而且其方法也不引用 this 的对象。==
+**所谓稳妥对象，指的是没有公共属性，而且其方法也不引用 this 的对象。**
 
 稳妥对象最适合在一些安全的环境中（这些环境中会禁止使用 this 和 new），或者在防止数据被其他应用程序（如 Mashup程序）改动时使用。稳妥构造函数遵循与寄生构造函数类似的模式，但有两点不同：
 
@@ -831,7 +831,7 @@ function Person(name){
 
 ## 继承
 
-ECMAScript ==只支持实现继承==，而且其实现继承**主要是依靠原型链来实现的**。 
+ECMAScript **只支持实现继承**，而且其实现继承**主要是依靠原型链来实现的**。 
 
 ### 原型链
 
@@ -888,7 +888,7 @@ ECMAScript 中描述了原型链的概念，并将原型链作为实现继承的
 
 -   关于函数声明，它的一个重要特征就是**函数声明提升**（function declaration hoisting），意思是在执行
     代码之前会先读取函数声明。 
--   函数表达式与其他表达式一样，在使用前==必须先赋值==。
+-   函数表达式与其他表达式一样，在使用前**必须先赋值**。
 
 ### 递归
 
@@ -985,7 +985,7 @@ console.log(new MyObject());//MyObject没有var声明，所以是一个全局变
 ps:这个模式在定义构造函数时并没有使用函数声明，而是
 使用了函数表达式 -->函数声明至创建局部变量，因此MyObject用了函数表达式的形式-->但在严格模式下，未经声明赋值会导致错误。
 
-==这个模式与在构造函数中定义特权方法的主要区别，就在于私有变量和函数是由实例共享的。==
+**这个模式与在构造函数中定义特权方法的主要区别，就在于私有变量和函数是由实例共享的。**
 
 由于特权方法是在原型上定义的，因此所有实例都使用同一个函数。
 
@@ -1133,9 +1133,9 @@ self:始终指向window.
 | screenLeft | 表示窗口相对于屏幕左边的位置 | Firefox为screenX |
 | screenTop  | 表示窗口相对于屏幕顶部的位置 | Firefox为screenX |
 
-moveTo():参数为新位置的x和y坐标值，不适用于框架，只对外层window对象适用。
+`moveTo()`:参数为新位置的x和y坐标值，不适用于框架，只对外层window对象适用。
 
-moveBy():参数为x和y轴位移的像素值,不适用于框架，只对外层window对象适用。
+`moveBy()`:参数为x和y轴位移的像素值,不适用于框架，只对外层window对象适用。
 
 ### 窗口大小
 
