@@ -346,7 +346,23 @@ var num3 = ++a +b;//22
 */
 ```
 
+>   ++/--如果操作的对象是非数字，会涉及到类型的转换：
+>
+>   包含数字的字符串（如`"123"`,不能是`"123aaa"`等包含有字母或其它值）会直接转换为对应的数字
+>
+>   `null`、空字符串`""` 转换为0
+>
+>   boolean值 `true`转换为`1`，`false` 转换为`0`
+>
+>   如果一元数组且唯一的元素为数字，则转换为对应数字，空数组对应`0`
+>
+>   其他类型都会输出 `NaN`，[详细...](http://javascript.ruanyifeng.com/grammar/conversion.html)
+
 #### 布尔操作符
+
+`Boolean()` 将其他类型转换为 boolean 值：true/false
+
+`0`,`""`,`NaN`,`null`,`undefined`全部转化为 false,其余皆为 true.
 
 ##### 逻辑非 !
 
