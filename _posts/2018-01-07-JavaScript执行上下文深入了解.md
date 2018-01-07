@@ -1,6 +1,6 @@
 ---
 load: post
-title: [转]What is the Execution Context & Stack in JavaScript?
+title: What is the Execution Context & Stack in JavaScript?
 date: 2018-01-07
 header-img: img/post-bg-desk.jpg
 catalog: true
