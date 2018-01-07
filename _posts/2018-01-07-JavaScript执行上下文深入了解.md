@@ -1,6 +1,6 @@
 ---
 load: post
-title: What is the Execution Context & Stack in JavaScript?
+title: [转]What is the Execution Context & Stack in JavaScript?
 date: 2018-01-07
 header-img: img/post-bg-desk.jpg
 catalog: true
@@ -11,7 +11,7 @@ tags:
 
 
 
-【转】[Davidshariff](http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/)
+转自->[Davidshariff](http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/)
 
 ## [What is the Execution Context & Stack in JavaScript?](http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/#first-article)
 
