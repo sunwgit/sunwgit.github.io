@@ -9,9 +9,7 @@ tags:
  - 执行上下文
 ---
 
-
-
-转自->[Davidshariff](http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/)
+转自->[Davidshariff](http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/)  
 
 ## [What is the Execution Context & Stack in JavaScript?](http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/#first-article)
 
@@ -43,7 +41,7 @@ As we already know, when a browser first loads your script, it enters the `globa
 
 If you call another function inside this current function, the same thing happens. The execution flow of code enters the inner function, which creates a new `execution context` that is pushed to the top of the existing stack. The browser will always execute the current `execution context` that sits on top of the stack, and once the function completes executing the current `execution context`, it will be popped off the top of the stack, returning control to the context below in the current stack. The example below shows a recursive function and the program’s `execution stack`:
 
-```
+```js
 (function foo(i) {
     if (i === 3) {
         return;
@@ -83,13 +81,15 @@ So we now know that everytime a function is called, a new `execution context` is
 
 It is possible to represent each `execution context` conceptually as an object with 3 properties:
 
-```
+```js
 executionContextObj = {
-    'scopeChain': { /* variableObject + all parent execution context's variableObject */ },
-    'variableObject': { /* function arguments / parameters, inner variable and function declarations */ },
+    'scopeChain': { 
+    /* variableObject + all parent execution context's variableObject */ 	 },
+    'variableObject': { 
+    /* function arguments / parameters, inner variable and function declarations */ 
+    },
     'this': {}
 }
-
 ```
 
 ### Activation / Variable Object [AO/VO]
@@ -128,7 +128,7 @@ This `executionContextObj` is created when the function is invoked, but *before*
 
 Let’s look at an example:
 
-```
+```js
 function foo(i) {
     var a = 'hello';
     var b = function privateB() {
@@ -145,7 +145,7 @@ foo(22);
 
 On calling `foo(22)`, the `creation stage` looks as follows:
 
-```
+```js
 fooExecutionContext = {
     scopeChain: { ... },
     variableObject: {
@@ -165,7 +165,7 @@ fooExecutionContext = {
 
 As you can see, the `creation stage` handles defining the names of the properties, not assigning a value to them, with the exception of formal arguments / parameters. Once the `creation stage` has finished, the flow of execution enters the function and the activation / code `execution stage` looks like this after the function has finished execution:
 
-```
+```js
 fooExecutionContext = {
     scopeChain: { ... },
     variableObject: {
@@ -180,14 +180,13 @@ fooExecutionContext = {
     },
     this: { ... }
 }
-
 ```
 
 ### A Word On Hoisting
 
 You can find many resources online defining the term `hoisting` in JavaScript, explaining that variable and function declarations are *hoisted* to the top of their function scope. However, none explain in detail why this happens, and armed with your new knowledge about how the interpreter creates the `activation object`, it is easy to see why. Take the following code example:
 
-```
+```js
 (function() {
 
     console.log(typeof foo); // function pointer
