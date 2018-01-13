@@ -474,6 +474,20 @@ var num3 = ++a +b;//22
 
 ## RegExp类型
 
+语法：
+
+```js
+var expression = / pattern / flags ;
+```
+
+`flags`的单个标志：
+
+`g`:表示全局(*global*)模式，匹配所有符合规则
+
+`i`:表示不区分大小写（ignoreCase-insensitive)模式（pattern)
+
+`m`:表示多行(multiline)模式，即在到达一行文本末尾时还会继续查找下一行是否存在与模式匹配的项。
+
 ## Function类型
 
 函数实际上是对象。每个函数都是Function类型的实例，而且跟其他引用类型一样具有属性和方法。**函数名实际上是一个指向函数对象的指针**。
