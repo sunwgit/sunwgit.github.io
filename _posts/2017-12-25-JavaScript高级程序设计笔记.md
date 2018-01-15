@@ -402,7 +402,7 @@ var num3 = ++a +b;//22
 
 ##### 逻辑或 ||
 
->if object || foo :back: object
+>if object \|\| foo :back: object
 >
 >if foo(false) || object :back: object
 >
