@@ -402,45 +402,48 @@ var num3 = ++a +b;//22
 
 ##### 逻辑或 ||
 
->if object && foo :back: object
+>if object || foo :back: object
 >
->if foo(false) && object :back: object
+>if foo(false) || object :back: object
 >
->if object1 && object2 :back: object1
+>if object1 || object2 :back: object1
 >
->if null && null :back: null
+>if null || null :back: null
 >
->if NaN && NaN :back: NaN
+>if NaN || NaN :back: NaN
 >
->if undefined && undefined :back: undefined
+>if undefined || undefined :back: undefined
 
 #### 乘性操作符
 
-乘法-*	除法-/	求模-%
+乘法规则：
 
-##### 乘法
+-   同符号数相乘得正数，异符号相乘得负数，超出数值范围得`Infinity` 或者 `-Infinity`
+-   如果有一个操作数是 `NaN` ，结果为 `NaN`
+-   `Infinity * 0` 结果为 `NaN`
+-   `Infinity * Infinity` 结果为 `Infinity`
+-   `Inifity * 有效数字` 结果为 `Infinity` 或者 `-Infinity`
+-   如果是一个非数字参与乘法运算，则需要调用 `Number()` 方法转为数字然后按照以上规则参与运算
 
-规则：
+除法规则：
 
-> if number * number :back: number
->
-> if NaN * number :back: NaN
->
-> if Infinity * 0 :back: NaN
->
-> if Infinity * !0 :back:+-Infinity
->
-> if Infinity * Infinity :back: Infinity
->
-> if foo* number :back: Number(foo)*number
+-   同符号数相除得正数，异符号相除得负数，超出数值范围得`Infinity` 或者 `-Infinity`
+-   如果有一个操作数是 `NaN` ，结果为 `NaN`
+-   `非 0 数字 / 0` 结果为 `Infinity` 或者 `-Infinity`
+-   `0 / 0` 结果为 `NaN`
+-   `Infinity / Infinity` 结果为 `NaN`
+-   `Infinity / 任何有效数字` 结果为 `Infinity`
+-   如果有一个操作数不是数值，则在后台调用 `Number()` 将其转换为数值，然后再应用上面的规则。 
 
-##### 除法
+求模:
 
-规则与乘法基本一样
-
-##### 求摸
-
-同上
+-   如果有一个操作数是 `NaN`，结果为 `NaN`
+-   `Infinity % 有限数字` 结果为 `NaN`
+-   `有限数字 % 0` 结果为 `NaN`
+-   `Infinity % Infinity` 结果为 `NaN`
+-   `有限数字 n % Infinity` 结果为有限数字 `n`
+-   `0 % 任何有效数字` 结果都为 `0`
+-   如果有一个操作数不是数值，则在后台调用 `Number()` 将其转换为数值，然后再应用上面的规则。 
 
 #### 加性操作符
 
