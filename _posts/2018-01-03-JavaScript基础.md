@@ -765,12 +765,16 @@ var arr = [12,34,22];
     }
 
     // 切换选项卡
+    var preIndex = 1;
     function changeTab(n) {
         // 清除已经存在的样式
-        for (var i = 0; i < oLis.length; i++) {
-            oLis[i].className = null;
-            oDivs[i].className = null;
-        }
+        //for (var i = 0; i < oLis.length; i++) {
+            //oLis[i].className = "";
+            //oDivs[i].className = "";
+        //}
+        oLis[preIndex].className = "";
+        oDivs[preIndex].className = "";
+      	preIndex = n;
         // 设置选项卡点击之后的样式
         oLis[n].className = "selectLi";
         oDivs[n].className = "selectDiv";
@@ -997,7 +1001,7 @@ while (arr.length < 4) {
 console.log(arr);
 ```
 
-## DOM Document Object Model
+## DOM
 
 浏览器渲染页面时，会把页面所有内容渲染成有层次关系的DOM节点。
 
@@ -1216,10 +1220,10 @@ var oText = document.createTextNode("Hello");
 var oBody = document.body; // 获得body标签
 var oHtml = document.documentElement;  //获得html标签
 oBody.appendChild(oDiv);
-oDiv.appendChild(oText);// 一般不这么用  有innerText
+oDiv.appendChild(oText);// 一般不这么用  有innerHTML
 ```
 
-###  删除
+####  删除
 
 ```js
 document.removeChild(ele);
@@ -1251,7 +1255,7 @@ ele.setAttribute(attrName,attrValue);
 ele.getAttribute(attrName);
 ```
 
->   `ele.setAttribute("class","classValue"); ` IE7及以下浏览器不支持
+>   `ele.setAttribute("class","classValue"); ` 设置**原生**属性时，IE7及以下浏览器不支持
 
 ## Date
 
@@ -1265,7 +1269,7 @@ ele.getAttribute(attrName);
 
 `clearTimeout()`				`clearInterval()`   		
 
-### 倒计时案例
+#### 倒计时案例
 
 ```html
 <!DOCTYPE html>
@@ -1303,7 +1307,7 @@ ele.getAttribute(attrName);
         var minute = Math.floor(timeDiff / 1000 / 60 - hour * 60);
         var second = Math.floor(timeDiff / 1000 - minute * 60 - hour * 60 * 60);
 
-        document.getElementById("time").innerHTML = zero(hour) + "时" + zero(minute) + "分" + zero(second) + "秒";
+        document.getElementById("time").innerHTML = timeFormat(hour) + "时" + timeFormat(minute) + "分" + timeFormat(second) + "秒";
         if (timeDiff <= 0) {
             clearInterval(timer);
             document.getElementById("time").innerHTML = "下课";
@@ -1311,7 +1315,7 @@ ele.getAttribute(attrName);
     }
 
     // 格式化时间
-    function zero(time) {
+    function timeFormat(time) {
         return time < 10 ? "0" + time : time;
     }
 
