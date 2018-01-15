@@ -404,15 +404,15 @@ var num3 = ++a +b;//22
 
 >if object \|\| foo :back: object
 >
->if foo(false) || object :back: object
+>if foo(false) \|\| object :back: object
 >
->if object1 || object2 :back: object1
+>if object1 \|\| object2 :back: object1
 >
->if null || null :back: null
+>if null \|\| null :back: null
 >
->if NaN || NaN :back: NaN
+>if NaN \|\| NaN :back: NaN
 >
->if undefined || undefined :back: undefined
+>if undefined \|\| undefined :back: undefined
 
 #### 乘性操作符
 
