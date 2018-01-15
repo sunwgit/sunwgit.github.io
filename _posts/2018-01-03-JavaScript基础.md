@@ -1,6 +1,6 @@
 ---
 load: post
-title: js笔记第一天
+title: JavaScript 基础学习笔记
 date: 2018-01-03
 header-img: img/post-bg-desk.jpg
 catalog: true
@@ -1267,5 +1267,68 @@ ele.getAttribute(attrName);
 
 ### 倒计时案例
 
-​	
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时</title>
+    <style>
+        div {
+            font-size: 30px;
+            background: palegreen;
+            height: 40px;
+            text-align: center;
+        }
+
+        span {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+<div id="div">距离下课还剩下<span id="time"></span></div>
+</body>
+</html>
+
+<script>
+    var timer = setInterval(getTime, 1000);
+
+    function getTime() {
+        var now = new Date();
+        var target = new Date("2018/01/13 20:20:15");
+        var timeDiff = target.getTime() - now.getTime();
+
+        var hour = Math.floor(timeDiff / 1000 / 60 / 60);
+        var minute = Math.floor(timeDiff / 1000 / 60 - hour * 60);
+        var second = Math.floor(timeDiff / 1000 - minute * 60 - hour * 60 * 60);
+
+        document.getElementById("time").innerHTML = zero(hour) + "时" + zero(minute) + "分" + zero(second) + "秒";
+        if (timeDiff <= 0) {
+            clearInterval(timer);
+            document.getElementById("time").innerHTML = "下课";
+        }
+    }
+
+    // 格式化时间
+    function zero(time) {
+        return time < 10 ? "0" + time : time;
+    }
+
+    // 给一个点击事件，如果倒计时运行则点击后停止，反之，则运行。
+    var oDiv = document.getElementById("div");
+    oDiv.onclick = function () {
+        if (timer) {
+            clearInterval(timer);
+            timer = null;
+        } else {
+            timer = setInterval(getTime, 1000);
+        }
+    }
+</script>
+```
+
+
+
+
 
