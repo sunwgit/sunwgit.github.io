@@ -220,7 +220,7 @@ console.log(str.replace(/Microsoft/, "W3School"));//Visit W3School!
 
 `toLowerCase` 把字符串转为小写
 
-`trim`	去除字符串首部的空格
+`trim`	去除字符串首部和尾部的空格
 
 `concat` 拼接两个字符串
 
