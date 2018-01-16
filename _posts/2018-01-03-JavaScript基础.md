@@ -823,7 +823,7 @@ var arr = [12,34,22];
 | `shift()`         | 删除数组**头部**的**一个**元素                      |                                          | 被删除的元素                       |                             |
 | `splice(n,m,[x])` | 从索引`n`开始删除`m`项，然后用`x`的内容**替换**删除的内容，这里的替换可能增加原数组长度:如果`m==0`,插入的元素在`n`的前边 | `n,m`必须;`x`可选；                           | 被删除的元素构成的**数组**，如果没有删除返回`[]` |                             |
 | `reverse()`       | 反向排列                                     |                                          | 反转后的数组                       |                             |
-| `sort()`          | 对数组做各种**有序**排列                           | 1. 不传参，默认ascii 顺序排列，只能对10以内的数字排序<br />2.参数为回调函数：`function(a,b){return a-b}`,若返回`a-b`,升序；若返回`b-a`,降序。 | 重新排序后的数组                     |                             |
+| `sort()`          | 对数组做各种**有序**排列                           | 1. 不传参，默认ascii 顺序排列，只能对位数相同的数字排序<br />2.参数为回调函数：`function(a,b){return a-b}`,若返回`a-b`,升序；若返回`b-a`,降序。 | 重新排序后的数组                     |                             |
 
 **不会改变原数组的方法：**
 
@@ -1220,7 +1220,8 @@ var oText = document.createTextNode("Hello");
 var oBody = document.body; // 获得body标签
 var oHtml = document.documentElement;  //获得html标签
 oBody.appendChild(oDiv);
-oDiv.appendChild(oText);// 一般不这么用  有innerHTML
+oDiv.appendChild(oText);// 在 oDiv 之后添加 一般不这么用  有innerHTML
+oBody.insertBefore(oText,oDiv);//在 oDiv 之前添加
 ```
 
 ####  删除
@@ -1253,6 +1254,7 @@ ele.cloneNode(true);
 ```js
 ele.setAttribute(attrName,attrValue);
 ele.getAttribute(attrName);
+ele.removeAttribute(attrName);
 ```
 
 >   `ele.setAttribute("class","classValue"); ` 设置**原生**属性时，IE7及以下浏览器不支持
