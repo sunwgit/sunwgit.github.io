@@ -47,7 +47,7 @@ tags: JavaScript
 
 ## confirm
 
-确认框，当点击弹出框的*确定*按钮时，返回*true*,点击*取消*,返回*false*.
+确认框，当点击弹出框的*确定*按钮时，返回`true`,点击*取消*,返回`false`.
 
 ## prompt
 
@@ -325,7 +325,7 @@ console.log(obj);//{1: 1, name: "sunw", age: 1, skill type: Array(2), sex: "男"
 
 与通常对 delete 的理解不同，delete 操作符与直接释放内存**无关**。内存管理 通过断开引用来间接完成的，查看[内存管理](https://developer.mozilla.org/zh-CNdocs/Web/JavaScript/Memory_Management)页可了解详情。
 
-**delete **操作符会从某个对象上移除指定属性。成功删除的时候回返回 `true`，否则返回 `false`。但是，重要的是要考虑以下情况：
+`delete` 操作符会从某个对象上移除指定属性。成功删除的时候回返回 `true`，否则返回 `false`。但是，重要的是要考虑以下情况：
 
 -   如果你删除的属性在对象上不存在，那么delete将不会起作用，但仍会返回true
 
