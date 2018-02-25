@@ -975,7 +975,7 @@ console.log(insertSort(arr));
 ```js
 Math.sqrt();//开方
 Math.pow();//幂次方
-Math.ads();//绝对值
+Math.abs();//绝对值
 Math.floor();//向下取整
 Math.ceil();//向上取整
 Math.round();//四舍五入
