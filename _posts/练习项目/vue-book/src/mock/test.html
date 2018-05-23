@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function ajax({ url = "", type = "get", dataType = "json" }) {
+            return new Promise((resolve, reject) => {
+                let xhr = new XMLHttpRequest();
+                xhr.open(type, url);
+                xhr.responseType = dataType;
+                xhr.onload = function () {
+                    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+                        resolve(xhr.response);
+                    }
+                };
+                xhr.onerror = function (err) {
+                    reject(err);
+                };
+                xhr.send();
+            });
+        }
+        // ajax({ url: "./book.json" })
+        //     .then(data => console.log(data),
+        //         err => console.log(err)
+        //     );
+        // fetch('./book.json').then(data => console.log(data)
+        // , err => console.log(err));
+        async function fn(){
+            let res = await fetch('./book.json');
+            let data = res.json();
+            data.then(json=>console.log(json))
+        }
+        fn();
+    </script>
+</body>
+
+</html>
