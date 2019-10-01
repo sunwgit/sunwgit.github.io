@@ -224,6 +224,23 @@ console.log(str.replace(/Microsoft/, "W3School"));//Visit W3School!
 
 `concat` 拼接两个字符串
 
+**substr,substring,slice在参数为负数时区别：**
+- substr(start,[length]) 
+1. if `start<0 && abs(start)` > `length`, `start`=0; 
+2. if `start<0 && abs(start)` <= `length`, `start`=`start+length`;
+- substring(start,[end])
+1. if `start|end` < 0,`start|end` = 0;
+2. if `start|end` >= `length`,`start|end`=`length`
+3. if `start` > `end`,`start=end`,`end=start`;
+- slice(start,end)
+1. if `start|end` < 0 && `abs(start|end)` >= `length`, `start|end`=0
+2. if `start|end` < 0,`start|end` = `start|end` + `length`
+
+**最终总结：**
+>substr和slice对于负数下标处理相同，即**绝对值大于length，按照0处理，否则，从数组后边往前找，即length+index**
+
+>substring 对于负数下标，处理方法简单粗暴，即**只要小于0，都按照0处理**，
+需要注意的是substring最先判断两个参数大小，调整顺序，然后处理负数问题。
 ### 数字类型　number
 
 >   0 12 -12 9.2 ,number有一个特殊类型：`NaN`
