@@ -17,7 +17,7 @@ tags: JavaScript
     <div onclick="alert(1);">js 第一天</div>
     ```
 
-    ​
+    
 
 2.  内嵌式 script 元素标签 在项目中偶尔使用，不建议使用
 
@@ -27,7 +27,7 @@ tags: JavaScript
     </script>
     ```
 
-    ​
+    
 
 3.  外链式  script标签，src外部js文件引入，一般放在最后面，推荐
 
@@ -377,13 +377,13 @@ console.log(obj);//{1: 1, name: "sunw", age: 1, skill type: Array(2), sex: "男"
 
 2.  引用类型值：按引用访问，当查询时，我们需要先从栈中读取内存地址，然后再顺藤摸瓜地找到保存在堆内存中的值；
 
-    ​
+    
 
-    ​
+    
 
     ![img](http://upload-images.jianshu.io/upload_images/67090-a3fecb055ffebaf8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/484)
 
-    ​
+    
 
 **两种类型复制**
 基本类型变量的复制：  
