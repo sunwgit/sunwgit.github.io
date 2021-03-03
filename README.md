@@ -1,8 +1,8 @@
-## [我的Blog->](https://sunwgit.github.io/)
+## [Blog](https://sunwgit.github.io/)
 
 ## 出现的问题
 
-对 `Markdown` 一直比较熟悉，但对 `YAML` 不太了解，以为也是和 `Markdown` 一样的规则比较松散的标记语言，结果总是不出效果。
+对 `YAML` 不太了解，总是不出效果
 
 最后在[这里](http://www.cnblogs.com/kaiye/archive/2013/04/24/3039346.html)找到了答案：
 
