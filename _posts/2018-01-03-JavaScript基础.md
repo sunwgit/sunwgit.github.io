@@ -541,7 +541,9 @@ var foo = function(){
 }
 ```
 
+**`闭包`**
 
+通过字面量创建的函数对象包含一个连接到外部上下文的连接，这被叫做`闭包`。（JavaScript语言精粹的定义）
 
 ## == 运算符
 
@@ -669,13 +671,13 @@ switch(case){
 
 [`for-in`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in) 遍历对象本身的所有可枚举属性，以及对象从其构造函数原型中继承的属性（更接近原型链中对象的属性覆盖原型属性）。
 
-遍历次数受属性的个数决定，`for...in`不应该用于迭代一个 `Array`.
+遍历次数受属性的个数决定，`for...in`一般不用于迭代一个 `Array`实例.
 
 通常，在迭代过程中最好不要在对象上进行添加、修改或者删除属性的操作，除非是对当前正在被访问的属性。
 
 `for` 遍历次数受 `length` 控制。
 
-另外，in操作符用来判断某个属性属于某个对象，可以是对象的直接属性，也可以是通过prototype继承的属性
+另外，`in`操作符用来判断某个属性属于某个对象，可以是对象的直接属性，也可以是通过 *prototype* 继承的属性
 
 ```js
 var person = {name:"kk",age:12};
