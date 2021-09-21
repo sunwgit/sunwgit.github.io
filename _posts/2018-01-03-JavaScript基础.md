@@ -118,11 +118,11 @@ const name = "nik";//name 作为一个常量，其值不可修改
 
 # 数据类型
 
-## 基本数据类型
+## 基本数据类型（也叫原始类型Primitive value）
 
 number/string/null/undefined/boolean
 
-## 引用数据类型 Object
+## 引用数据类型 (Reference value)
 
 Obejct/Array/Function/Date/RegExp/Error
 
@@ -196,11 +196,11 @@ Object.prototype.toString.call(arr);// "[object Array]"
 
 `substring` substring(start,[end])返回从指定位置截取的字符串，end若省略，截取到结束
 
-`slice` slice(start,end)返回从指定位置截取的字符串，end若省略，截取到结束,start,end都可为负数，表示从末尾开始计数
+`slice` slice(start,[end])返回从指定位置截取的字符串，end若省略，截取到结束,start,end都可为负数，表示从末尾开始计数
 
 `split` split(seprator,[length]) 返回被分割形成的数组，length 指定数组的长度
 
-`replace`  方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。
+`replace`  方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串，返回值为修改后的新字符串。
 
 ```js
 // 语法：stringObject.replace(regexp/substr,replacement)
@@ -210,19 +210,22 @@ console.log(str.replace(/Microsoft/, "W3School"));//Visit W3School!
 
 
 
-`match`方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。返回匹配的字符串。
+`match` 检索返回一个字符串匹配正则表达式的结果。
+
+- 如果使用 `g` 标志，则将返回与完整正则表达式匹配的所有结果，但不会返回捕获组。
+- 如果未使用 `g` 标志，则仅返回第一个完整匹配及其相关的捕获组（Array）。 在这种情况下，返回的项目将具有如下所述的其他属性。
 
 `indexOf`	检测某个字符是否是字符串的一部分，若是，返回所在索引，不在，返回 -1
 
 `lastIndexOf`	同上，检测顺序为倒序
 
-`toUpperCase`	把字符串转为大写
+`toUpperCase`	把字符串转为大写，返回新字符串
 
-`toLowerCase` 把字符串转为小写
+`toLowerCase` 把字符串转为小写，返回新字符串
 
-`trim`	去除字符串首部和尾部的空格
+`trim`	去除字符串首部和尾部的空格，返回值为修正后的新字符串
 
-`concat` 拼接两个字符串
+`concat` 拼接两个字符串，返回新字符串
 
 **substr,substring,slice在参数为负数时区别：**
 - substr(start,[length]) 
@@ -254,6 +257,14 @@ typeof NaN;//"number"
 `Number()` 强制转换，将其他数据类型转换为number类型
 
 关于数据类型的转换，[->详细...](http://javascript.ruanyifeng.com/grammar/conversion.html)
+
+转换步骤：
+
+> 第一步，调用对象自身的 `valueOf` 方法。如果返回原始类型的值，则直接对该值使用 `Number` 函数，不再进行后续步骤。
+>
+> 第二步，如果 `valueOf` 方法返回的还是对象，则改为调用对象自身的 `toString` 方法。如果 `toString` 方法返回原始类型的值，则对该值使用 `Number` 函数，不再进行后续步骤。
+>
+> 第三步，如果 `toString` 方法返回的是对象，就报错。
 
 `parseInt()` 提取字符串中的整数，遇到第一个非数字则返回`NaN`
 
@@ -340,7 +351,7 @@ console.log(obj);//{1: 1, name: "sunw", age: 1, skill type: Array(2), sex: "男"
 
 **真删除**:对象的属性不存在，举例，`delete obj.name` 或 `delete obj["name"]`
 
-与通常对 delete 的理解不同，delete 操作符与直接释放内存**无关**。内存管理 通过断开引用来间接完成的，查看[内存管理](https://developer.mozilla.org/zh-CNdocs/Web/JavaScript/Memory_Management)页可了解详情。
+与通常对 delete 的理解不同，delete 操作符与直接释放内存**无关**。内存管理 通过断开引用来间接完成的，查看[内存管理](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Memory_Management)页可了解详情。
 
 `delete` 操作符会从某个对象上移除指定属性。成功删除的时候回返回 `true`，否则返回 `false`。但是，重要的是要考虑以下情况：
 
