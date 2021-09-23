@@ -458,7 +458,7 @@ alert(person.name); // ABC
 **两种变量类型检测**
 
 1.  `typeof` 操作符是检测基本类型的最佳工具；
-2.  **如果变量值是nul或者对象，typeof 将返回“object”；**
+2.  **如果变量值是null或者对象，typeof 将返回“object”；**
 3.  `instanceof` 用于检测引用类型，可以检测到具体的，它是什么类型的实例；
 4.  如果变量是给定引用类型的实例，`instanceof` 操作符会返回 `true`;
 
@@ -483,7 +483,7 @@ ECMAScript 还提供了三个特殊的引用类型 `Boolean`，`String`，`Numbe
 
 正因为有第三步这个销毁的动作，所以基本数据类型不可以添加属性和方法，这也正是基本装包类型和引用类型主要区别：**对象的生存期**。  
 
-**使用new操作符创建的引用类型的实例，在执行流离开当前作用域之前都是一直保存在内存中。自动创建的基本包装类型的对象，则只存在于一行代码的执行瞬间，然后立即被销毁。**
+**使用 `new` 操作符创建的引用类型的实例，在执行流离开当前作用域之前都是一直保存在内存中。自动创建的基本包装类型的对象，则只存在于一行代码的执行瞬间，然后立即被销毁。**
 
 ------
 
@@ -682,7 +682,7 @@ switch(case){
 
 [`for-in`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in) 遍历对象本身的所有可枚举属性，以及对象从其构造函数原型中继承的属性（更接近原型链中对象的属性覆盖原型属性）。
 
-遍历次数受属性的个数决定，`for...in`一般不用于迭代一个 `Array`实例.
+`for ... in`是为遍历对象属性而构建的，不建议与数组一起使用，数组可以用`Array.prototype.forEach()`和`for ... of`，那么`for ... in`的到底有什么用呢？
 
 通常，在迭代过程中最好不要在对象上进行添加、修改或者删除属性的操作，除非是对当前正在被访问的属性。
 
@@ -873,16 +873,19 @@ var arr = [12,34,22];
 ```js
 function bubbleSort(arr) {
   if (Array.isArray(arr)) {
-    for (var j = 0; j < arr.length - 1; j++) {
+    var index = 0;
+    for (var j = 0; j < arr.length - 1; j++) {//控制循环轮数
       var temp = null;
-      for (var i = 0; i < arr.length - 1 - j; i++) {
+      var flag = true;//标志位，如果某轮内循环后没有交换位置，说明数组已经排序完成
+      console.log("循环第" + index + "轮");
+      for (var i = 0; i < arr.length - 1 - j; i++) {//遍历控制位置交换
         if (arr[i] > arr[i + 1]) {
           temp = arr[i];
           arr[i] = arr[i + 1];
           arr[i + 1] = temp;
+          flag = false;
         }
         index++;
-        console.log("循环第" + index + "次");
       }
     }
   }
@@ -890,13 +893,14 @@ function bubbleSort(arr) {
 }
 
 console.log(bubbleSort([1, 3, 2, 2, 0]));
+//1、外层 for 循环控制循环次数
+//2、内层 for 循环进行两数交换，找每次的最大数，排到最后
+//3、设置一个标志位，减少不必要的循环
 ```
-
-
 
 #### 数组去重
 
-双循环
+- 双循环
 
 ```js
 function removeDuplication(arr) {
@@ -914,7 +918,7 @@ function removeDuplication(arr) {
 console.log(removeDuplication([1,5,2,1,2,3,4,3]));
 ```
 
-以对象为中介
+- 以对象为中介
 
 ```js
 function removeDuplication(arr) {
